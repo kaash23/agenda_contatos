@@ -1,5 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'dart:async';
 
 final String contactTable = "contactTable";
 final String idColumn = "idColumn";
@@ -69,7 +70,7 @@ class ContactHelper {
 
     Future<List> getAllContacts() async {
       Database dbContact = await db;
-      List listmap = await dbContact.query("SELECT * FROM $contactTable");
+      List listmap = await dbContact.rawQuery("SELECT * FROM $contactTable");
       List<Contact> listcontact = List();
       for(Map m in listmap){
         listcontact.add(Contact.fromMap(m));
